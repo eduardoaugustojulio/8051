@@ -1,0 +1,3 @@
+/home/eduardo/Documents/8051/helloword/build/CMakeFiles/edit_cache.dir
+/home/eduardo/Documents/8051/helloword/build/CMakeFiles/helloword.dir
+/home/eduardo/Documents/8051/helloword/build/CMakeFiles/rebuild_cache.dir
