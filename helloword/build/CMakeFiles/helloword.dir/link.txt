@@ -1,1 +1,0 @@
-/usr/bin/sdcc   -mmcs51 --model-small CMakeFiles/helloword.dir/src/main.c.rel --out-fmt-ihx -o  helloword.ihx  --model-small 
