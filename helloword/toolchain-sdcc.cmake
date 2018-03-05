@@ -5,7 +5,7 @@ SET(CMAKE_SYSTEM_NAME Generic)
 SET(CMAKE_C_COMPILER sdcc)
 
 # here is the target environment is located
-SET(CMAKE_FIND_ROOT_PATH  /usr/share/sdcc /home/alex/sdcc-install )
+SET(CMAKE_FIND_ROOT_PATH  /usr/share/sdcc)
 
 # adjust the default behaviour of the FIND_XXX() commands:
 # search headers and libraries in the target environment, search 
