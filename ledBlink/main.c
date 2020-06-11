@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <C8051F580.h>
-#include <compiler.h>
 
 SBIT (INPUT, SFR_P3, 5);                 // INPUT == 0 means switch depressed
 SBIT (BUZZER, SFR_P1, 6);
@@ -15,6 +14,7 @@ SBIT (LED_GREEN, SFR_P2, 1);
 void OSCILLATOR_Init (void);
 void PORT_Init (void);
 void ms_delay(unsigned int itime);
+void led_blink(void);
 
 //-----------------------------------------------------------------------------
 // main() Routine
@@ -22,44 +22,15 @@ void ms_delay(unsigned int itime);
 
 void main (void)
 {
-   SFRPAGE = ACTIVE_PAGE;              // Set SFR Page for PCA0MD
+   	SFRPAGE = ACTIVE_PAGE;              // Set SFR Page for PCA0MD
 
-   PCA0MD &= ~0x40;                    // Disable the watchdog timer
+   	PCA0MD &= ~0x40;                    // Disable the watchdog timer
 
-   PORT_Init ();                       // Initialize Port I/O
-   OSCILLATOR_Init ();                 // Initialize Oscillator
-
-   LED_RED = 0;
-   LED_BLUE = 0;
-   LED_GREEN = 0;
-
-   while (1)
-   {
-      if (INPUT == 0)                  // If switch depressed
-      {
-        LED_RED = 1;                   // Turn on LED
-		ms_delay(1000);
-		LED_RED = 0;
-   		LED_BLUE = 0;
-		LED_GREEN = 1;
-		ms_delay(1000);
-		LED_RED = 0;
-   		LED_GREEN = 0;
-      	LED_BLUE = 1;                   // Else, turn it off
-		ms_delay(1000);
-		LED_GREEN = 0;
-      	LED_BLUE = 0;
-		ms_delay(1000);
-      }
-      else
-      {
-		P4 &= ~0x20;
-		ms_delay(1000);
-		P4 |= 0x20;
-		ms_delay(1000);
-      }
-   }                                   // End of while(1)
-}                                      // End of main()
+   	PORT_Init ();                       // Initialize Port I/O
+   	OSCILLATOR_Init ();                 // Initialize Oscillator
+    
+    led_blink();	
+}         
 
 //-----------------------------------------------------------------------------
 // Initialization Subroutines
@@ -134,14 +105,32 @@ void PORT_Init (void)
    SFRPAGE = SFRPAGE_save;
 }
 
-
-//-----------------------------------------------------------------------------
-// End Of File
-//-----------------------------------------------------------------------------
-
 void ms_delay(unsigned int itime)
 {
 	unsigned int i,j;
 	for (i = 0; i< itime; i++)
 		for (j = 0; j < 100; j++);
+}
+
+void led_blink(void)
+{
+	LED_RED = 0;
+	LED_BLUE = 0;
+	LED_GREEN = 0;
+
+	for(;;)
+	{
+		if (INPUT == 0)                  // If switch depressed
+      	{
+        	LED_GREEN = 1;
+			LED_BLUE = 1;
+        	LED_RED = 1;	
+      	}
+      	else
+      	{
+	    	LED_RED = 0;
+   			LED_BLUE = 0;
+   			LED_GREEN = 0;
+      	}
+	}
 }
