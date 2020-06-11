@@ -1,12 +1,12 @@
-#8051
+# 8051  
+  
+Template repository to 8051 SDCC cmake build.
 
-Template repository to 8051 SDCC cmake.
+### to build:
 
-###to build:
-
-``
-sudo apt install -y sdcc cmake
-git clone git@github.com:eduardoaugustojulio/8051.git 
-cd 8051 && mkdir build/ && cd build/
+```
+sudo apt install -y cmake sdcc
+git clone git@github.com:eduardoaugustojulio/8051.git
+cd 8051/ && mkdir build/ && cd build/
 cmake .. && make
 ```
